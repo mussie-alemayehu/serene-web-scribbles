@@ -1,5 +1,5 @@
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
@@ -8,11 +8,6 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-  // Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
