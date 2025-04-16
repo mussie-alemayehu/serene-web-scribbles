@@ -33,6 +33,20 @@ export function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    
+    // Add transition class to body on mount
+    document.body.classList.add('transition-colors');
+    document.body.classList.add('duration-300');
+    
+    return () => {
+      document.body.classList.remove('transition-colors');
+      document.body.classList.remove('duration-300');
+    };
+  }, []);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -59,6 +73,10 @@ export function ThemeProvider({
       setTheme(theme);
     },
   };
+
+  if (!isMounted) {
+    return <>{children}</>;
+  }
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
