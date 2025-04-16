@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { BlogCard } from '@/components/BlogCard';
 import { BlogSearch } from '@/components/BlogSearch';
+import { BlogHeader } from '@/components/BlogHeader';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { searchBlogPosts } from '@/utils/SearchUtils';
 import { BlogPost } from '@/types/blog';
@@ -30,10 +31,8 @@ function Blog() {
     <Layout>
       <section className={`py-16 transition-opacity duration-700 ${visible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="container max-w-6xl mx-auto px-4">
+          <BlogHeader />
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-              Blog
-            </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Thoughts, insights, and tutorials on technology and design.
             </p>
