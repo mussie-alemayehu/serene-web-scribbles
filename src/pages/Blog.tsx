@@ -3,21 +3,23 @@ import { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { BlogCard } from '@/components/BlogCard';
 import { BlogSearch } from '@/components/BlogSearch';
-import { blogPosts } from '@/data/blogPosts';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { searchBlogPosts } from '@/utils/SearchUtils';
+import { BlogPost } from '@/types/blog';
 
 function Blog() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [visible, setVisible] = useState(false);
+  const { posts, loading } = useBlogPosts();
 
   useEffect(() => {
     setVisible(true);
   }, []);
 
   useEffect(() => {
-    setFilteredPosts(searchBlogPosts(blogPosts, searchTerm));
-  }, [searchTerm]);
+    setFilteredPosts(searchBlogPosts(posts, searchTerm));
+  }, [searchTerm, posts]);
 
   // Sort posts by date (newest first)
   const sortedPosts = [...filteredPosts].sort((a, b) => 
@@ -41,7 +43,11 @@ function Blog() {
             </div>
           </div>
 
-          {filteredPosts.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-xl">Loading posts...</p>
+            </div>
+          ) : filteredPosts.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-xl font-medium mb-2">No posts found</p>
               <p className="text-muted-foreground">

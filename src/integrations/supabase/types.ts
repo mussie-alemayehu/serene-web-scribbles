@@ -9,7 +9,77 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      authors: {
+        Row: {
+          avatar: string | null
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          avatar?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          avatar?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      blog_posts: {
+        Row: {
+          author_id: string
+          content: string
+          cover_image: string | null
+          created_at: string | null
+          date: string | null
+          excerpt: string | null
+          id: string
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id: string
+          content: string
+          cover_image?: string | null
+          created_at?: string | null
+          date?: string | null
+          excerpt?: string | null
+          id?: string
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string
+          content?: string
+          cover_image?: string | null
+          created_at?: string | null
+          date?: string | null
+          excerpt?: string | null
+          id?: string
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_posts_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "authors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

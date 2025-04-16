@@ -5,17 +5,18 @@ import { ArrowRight } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { BlogCard } from '@/components/BlogCard';
 import { Button } from '@/components/ui/button';
-import { blogPosts } from '@/data/blogPosts';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 
 function Home() {
   const [visible, setVisible] = useState(false);
+  const { posts, loading } = useBlogPosts();
 
   useEffect(() => {
     setVisible(true);
   }, []);
 
   // Show most recent posts first
-  const recentPosts = [...blogPosts].sort((a, b) => 
+  const recentPosts = [...posts].sort((a, b) => 
     new Date(b.date).getTime() - new Date(a.date).getTime()
   ).slice(0, 3);
 
@@ -35,30 +36,36 @@ function Home() {
             </p>
           </div>
 
-          <div className="space-y-16">
-            {featuredPost && (
-              <div className="animate-fade-in">
-                <BlogCard post={featuredPost} featured />
-              </div>
-            )}
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-xl">Loading posts...</p>
+            </div>
+          ) : (
+            <div className="space-y-16">
+              {featuredPost && (
+                <div className="animate-fade-in">
+                  <BlogCard post={featuredPost} featured />
+                </div>
+              )}
 
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-serif font-bold">Recent Posts</h2>
-                <Link to="/blog">
-                  <Button variant="ghost" className="gap-1">
-                    View all <ArrowRight size={16} />
-                  </Button>
-                </Link>
-              </div>
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-serif font-bold">Recent Posts</h2>
+                  <Link to="/blog">
+                    <Button variant="ghost" className="gap-1">
+                      View all <ArrowRight size={16} />
+                    </Button>
+                  </Link>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
-                {otherPosts.map((post) => (
-                  <BlogCard key={post.id} post={post} />
-                ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
+                  {otherPosts.map((post) => (
+                    <BlogCard key={post.id} post={post} />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </Layout>
