@@ -9,6 +9,7 @@ import { formatDate } from '@/utils/SearchUtils';
 import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import { toast } from 'sonner';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,10 +17,6 @@ function BlogPost() {
   const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-
-  const authorInitials = post?.author?.name
-    ? post.author.name.substring(0, 2).toUpperCase()
-    : 'A';
 
   useEffect(() => {
     async function loadPost() {
@@ -51,6 +48,11 @@ function BlogPost() {
     loadPost();
     window.scrollTo(0, 0);
   }, [slug, navigate]);
+
+  // Get author initials safely - only after post is loaded
+  const authorInitials = post?.author?.name
+    ? post.author.name.substring(0, 2).toUpperCase()
+    : 'A';
 
   if (loading) {
     return (
@@ -104,11 +106,13 @@ function BlogPost() {
             </div>
 
             <div className="mb-10">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-md"
-              />
+              <AspectRatio ratio={16/9}>
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </AspectRatio>
             </div>
           </header>
 
@@ -128,4 +132,3 @@ function BlogPost() {
 }
 
 export default BlogPost;
-

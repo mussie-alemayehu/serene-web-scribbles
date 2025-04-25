@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { BlogPost } from "@/types/blog";
 import { formatDate } from "@/utils/SearchUtils";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -17,13 +18,15 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   return (
     <Link to={`/blog/${post.slug}`} className="block group h-full">
       <Card className={`h-full overflow-hidden transition-all duration-300 hover:shadow-md dark:shadow-accent/5 hover:translate-y-[-4px] border-border/50 ${featured ? 'lg:flex' : ''}`}>
-        <div className={`relative ${featured ? 'lg:w-2/5' : 'h-52'}`}>
-          <img 
-            src={post.coverImage} 
-            alt={post.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className={`relative ${featured ? 'lg:w-2/5' : ''}`}>
+          <AspectRatio ratio={16/9}>
+            <img 
+              src={post.coverImage} 
+              alt={post.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </AspectRatio>
         </div>
         
         <div className={`flex flex-col ${featured ? 'lg:w-3/5' : ''} backdrop-blur-sm bg-card/80`}>
