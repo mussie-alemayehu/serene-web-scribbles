@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { BlogPost } from "@/data/blogPosts";
-import { FilePlus, Image, Tags } from "lucide-react";
+import { FilePlus, Image, Tags, Eye } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 interface PostEditorProps {
   onSave: (post: Partial<BlogPost>) => void;
@@ -34,17 +36,16 @@ export function PostEditor({ onSave, initialData }: PostEditorProps) {
       tags: formData.tags.split(",").map(tag => tag.trim()).filter(Boolean),
       date: new Date().toISOString(),
       author: {
-        name: "John Smith", // This would come from authenticated user
+        name: "John Smith",
         avatar: "https://randomuser.me/api/portraits/men/32.jpg"
       }
     };
 
     onSave(post);
-    toast.success("Post saved successfully!");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto p-6">
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
       <div className="space-y-2">
         <Label htmlFor="title">Title</Label>
         <Input
@@ -98,16 +99,59 @@ export function PostEditor({ onSave, initialData }: PostEditorProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="content">Content (Markdown)</Label>
-        <Textarea
-          id="content"
-          value={formData.content}
-          onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-          placeholder="Write your post content in Markdown"
-          className="min-h-[300px] font-mono text-sm"
-        />
-      </div>
+      <Tabs defaultValue="edit" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-4">
+          <TabsTrigger value="edit">Edit</TabsTrigger>
+          <TabsTrigger value="preview" className="gap-2">
+            <Eye className="h-4 w-4" />
+            Preview
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="edit">
+          <div className="space-y-2">
+            <Label htmlFor="content">Content (Markdown)</Label>
+            <Textarea
+              id="content"
+              value={formData.content}
+              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+              placeholder="Write your post content in Markdown"
+              className="min-h-[400px] font-mono text-sm"
+            />
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="preview" className="rounded-md border p-6">
+          <div className="prose prose-stone dark:prose-invert max-w-none">
+            <h1 className="mb-4">{formData.title || "Untitled Post"}</h1>
+            {formData.coverImage && (
+              <img 
+                src={formData.coverImage} 
+                alt={formData.title} 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+            )}
+            {formData.excerpt && (
+              <p className="text-lg text-muted-foreground mb-4 italic">
+                {formData.excerpt}
+              </p>
+            )}
+            <ReactMarkdown>{formData.content || "*No content yet*"}</ReactMarkdown>
+            {formData.tags && (
+              <div className="flex gap-2 mt-6">
+                {formData.tags.split(',').map((tag, index) => (
+                  <span 
+                    key={index} 
+                    className="px-2 py-1 bg-muted rounded-full text-sm"
+                  >
+                    {tag.trim()}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </TabsContent>
+      </Tabs>
 
       <div className="flex justify-end gap-4">
         <Button type="submit" className="w-full sm:w-auto">
