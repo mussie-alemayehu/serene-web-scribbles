@@ -16,6 +16,10 @@ function BlogPost() {
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
 
+  const authorInitials = post?.author?.name
+    ? post.author.name.substring(0, 2).toUpperCase()
+    : 'A';
+
   useEffect(() => {
     async function loadPost() {
       if (!slug) {
@@ -44,7 +48,6 @@ function BlogPost() {
     }
 
     loadPost();
-    // Scroll to top when post changes
     window.scrollTo(0, 0);
   }, [slug, navigate]);
 
@@ -77,7 +80,11 @@ function BlogPost() {
               <div className="flex items-center gap-1">
                 <User size={16} />
                 <span className="flex items-center gap-1">
-                  <img src={post.author.avatar} alt={post.author.name} className="w-6 h-6 rounded-full" />
+                  <img 
+                    src={post.author.avatar} 
+                    alt={authorInitials} 
+                    className="w-6 h-6 rounded-full" 
+                  />
                   {post.author.name}
                 </span>
               </div>

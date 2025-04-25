@@ -10,6 +10,10 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
+  const authorInitials = post.author.name
+    ? post.author.name.substring(0, 2).toUpperCase()
+    : 'A';
+
   return (
     <Link to={`/blog/${post.slug}`} className="block group h-full">
       <Card className={`h-full overflow-hidden transition-all duration-300 hover:shadow-md dark:shadow-accent/5 hover:translate-y-[-4px] border-border/50 ${featured ? 'lg:flex' : ''}`}>
@@ -28,7 +32,11 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
               <time dateTime={post.date} className="font-mono">{formatDate(post.date)}</time>
               <span>•</span>
               <span className="flex items-center gap-1">
-                <img src={post.author.avatar} alt={post.author.name} className="w-6 h-6 rounded-full border border-border/50" />
+                <img 
+                  src={post.author.avatar} 
+                  alt={authorInitials} 
+                  className="w-6 h-6 rounded-full border border-border/50" 
+                />
                 {post.author.name}
               </span>
             </div>

@@ -32,14 +32,21 @@ export function UserMenu() {
     );
   }
   
-  const userInitials = user.email ? user.email.substring(0, 2).toUpperCase() : 'U';
+  const userInitials = user.email 
+    ? user.email.substring(0, 2).toUpperCase() 
+    : (user.user_metadata?.full_name 
+      ? user.user_metadata.full_name.substring(0, 2).toUpperCase() 
+      : 'U');
   
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar>
-            <AvatarImage src={user.user_metadata?.avatar_url} />
+            <AvatarImage 
+              src={user.user_metadata?.avatar_url} 
+              alt={userInitials}
+            />
             <AvatarFallback>{userInitials}</AvatarFallback>
           </Avatar>
         </Button>
