@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 function About() {
   const [visible, setVisible] = useState(false);
@@ -23,14 +23,14 @@ function About() {
               <div className="md:col-span-1 animate-fade-in">
                 <div className="sticky top-24">
                   <img
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="John Smith"
+                    src="/lovable-uploads/8365085c-7701-49d5-a149-1796acd10c8a.png"
+                    alt="Mussie Alemayehu"
                     className="w-full max-w-[300px] rounded-lg mx-auto md:mx-0 mb-6 shadow-md"
                   />
                   
                   <div className="flex justify-center md:justify-start space-x-4 mb-6">
                     <a 
-                      href="https://github.com" 
+                      href="https://github.com/mussie-alemayehu" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-accent transition-colors"
@@ -39,16 +39,7 @@ function About() {
                       <Github size={20} />
                     </a>
                     <a 
-                      href="https://twitter.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-accent transition-colors"
-                      aria-label="Twitter"
-                    >
-                      <Twitter size={20} />
-                    </a>
-                    <a 
-                      href="https://linkedin.com" 
+                      href="https://www.linkedin.com/in/mussie-alemayehu/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-accent transition-colors"
@@ -57,7 +48,7 @@ function About() {
                       <Linkedin size={20} />
                     </a>
                     <a 
-                      href="mailto:john@example.com" 
+                      href="mailto:mussiea2020@gmail.com" 
                       className="text-muted-foreground hover:text-accent transition-colors"
                       aria-label="Email"
                     >
@@ -68,11 +59,10 @@ function About() {
                   <div className="text-sm">
                     <h2 className="font-medium mb-2">Tech Stack</h2>
                     <ul className="space-y-1 text-muted-foreground">
-                      <li>React & React Native</li>
-                      <li>TypeScript & JavaScript</li>
-                      <li>Node.js & Express</li>
-                      <li>TailwindCSS & Styled Components</li>
-                      <li>Next.js & Gatsby</li>
+                      <li>Lovable.dev</li>
+                      <li>Flutter & Dart</li>
+                      <li>Git & GitHub</li>
+                      <li>Firebase</li>
                     </ul>
                   </div>
                 </div>
@@ -80,32 +70,29 @@ function About() {
               
               <div className="md:col-span-2 space-y-8 animate-fade-in">
                 <div>
-                  <h2 className="text-2xl font-serif font-bold mb-4">Hello, I'm John Smith</h2>
+                  <h2 className="text-2xl font-serif font-bold mb-4">Hello, I'm Mussie Alemayehu</h2>
                   <p className="text-lg mb-4">
-                    I'm a passionate web developer and designer with over 8 years of experience building beautiful, functional, and user-centered digital experiences.
+                    I'm a passionate developer with 2 years of experience in building beautiful, functional, and user-centered applications. My journey in software development has been focused on creating impactful solutions using modern technologies.
                   </p>
                   <p className="text-lg mb-4">
-                    I specialize in modern JavaScript frameworks like React and love to explore the intersection of technology and design. My goal is to create digital products that not only look great but also solve real problems for users.
+                    I specialize in mobile development with Flutter and Dart, while also leveraging the power of Firebase for backend solutions. Recently, I've been exploring web development with Lovable.dev to expand my skill set and create full-stack applications.
                   </p>
                 </div>
                 
                 <div>
                   <h2 className="text-2xl font-serif font-bold mb-4">My Journey</h2>
                   <p className="text-lg mb-4">
-                    My journey in web development began when I was in college studying Computer Science. What started as a hobby quickly evolved into a passion and career. I've worked with startups, agencies, and large organizations, building everything from marketing websites to complex web applications.
+                    Throughout my two years in software development, I've had the opportunity to work with various technologies and frameworks. I'm particularly passionate about creating intuitive user interfaces and ensuring smooth user experiences across different platforms.
                   </p>
                   <p className="text-lg mb-4">
-                    Beyond coding, I enjoy writing about web development, sharing my knowledge, and contributing to open-source projects. This blog is my platform to document my learnings and hopefully help others along the way.
+                    I believe in writing clean, maintainable code and staying up-to-date with the latest developments in technology. Version control with Git and GitHub has been an essential part of my workflow, helping me collaborate effectively and manage code efficiently.
                   </p>
                 </div>
                 
                 <div>
                   <h2 className="text-2xl font-serif font-bold mb-4">When I'm Not Coding</h2>
-                  <p className="text-lg mb-4">
-                    Outside of work, I enjoy hiking, reading science fiction, photography, and exploring new coffee shops. I believe in continuous learning and am currently diving deeper into design systems and web accessibility.
-                  </p>
                   <p className="text-lg">
-                    Feel free to connect with me on social media or drop me an email if you'd like to chat!
+                    Outside of development, I'm an avid reader who enjoys books across all genres. You'll often find me immersed in a good book, watching interesting movies, or listening to music. These activities help me maintain a healthy work-life balance and often inspire creative solutions in my development work.
                   </p>
                 </div>
               </div>

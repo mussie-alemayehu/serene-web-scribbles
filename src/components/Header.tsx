@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { UserMenu } from "@/components/UserMenu";
+import { useAuth } from "@/context/AuthContext";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -47,6 +48,7 @@ export function Header() {
           <>
             <div className="flex items-center gap-2">
               <ThemeToggle />
+              <UserMenu />
               <button
                 className="p-2 transition-transform duration-300 hover:rotate-3"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
