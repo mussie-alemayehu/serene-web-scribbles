@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout';
 import { ShareButtons } from '@/components/ShareButtons';
 import { getBlogPostBySlug } from '@/hooks/useBlogPosts';
 import { formatDate } from '@/utils/SearchUtils';
+import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import { toast } from 'sonner';
 
@@ -82,15 +83,23 @@ function BlogPost() {
                 <span className="flex items-center gap-1">
                   <img 
                     src={post.author.avatar} 
-                    alt={authorInitials} 
+                    alt={post.author.name.substring(0, 2).toUpperCase()} 
                     className="w-6 h-6 rounded-full" 
                   />
                   {post.author.name}
                 </span>
               </div>
-              <div className="flex items-center gap-1">
-                <Tag size={16} />
-                <span>{post.tags.join(', ')}</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <Tag size={16} className="shrink-0" />
+                {post.tags.map((tag: string) => (
+                  <Badge 
+                    key={tag} 
+                    variant="secondary"
+                    className="px-2 py-0.5 text-xs font-medium"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
               </div>
             </div>
 
@@ -119,3 +128,4 @@ function BlogPost() {
 }
 
 export default BlogPost;
+

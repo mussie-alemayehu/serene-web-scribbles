@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -39,10 +38,8 @@ export function Footer() {
             <h3 className="font-medium text-lg mb-4">Connect</h3>
             <div className="flex space-x-4">
               {[
-                { icon: Github, label: "GitHub", url: "https://github.com" },
-                { icon: Twitter, label: "Twitter", url: "https://twitter.com" },
-                { icon: Linkedin, label: "LinkedIn", url: "https://linkedin.com" },
-                { icon: Instagram, label: "Instagram", url: "https://instagram.com" }
+                { icon: Github, label: "GitHub", url: "https://github.com/mussie-alemayehu" },
+                { icon: Linkedin, label: "LinkedIn", url: "https://www.linkedin.com/in/mussie-alemayehu/" }
               ].map(({ icon: Icon, label, url }) => (
                 <a 
                   key={label}
