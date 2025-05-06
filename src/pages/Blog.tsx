@@ -15,6 +15,7 @@ function Blog() {
   const { posts, loading } = useBlogPosts();
 
   useEffect(() => {
+    document.title = "Blog | MindfulBlog";
     setVisible(true);
   }, []);
 

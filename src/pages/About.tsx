@@ -7,6 +7,7 @@ function About() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    document.title = "About | MindfulBlog";
     setVisible(true);
   }, []);
 

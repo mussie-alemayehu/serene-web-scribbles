@@ -12,8 +12,10 @@ export default function NewPost() {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
 
-  // Check authentication
+  // Check authentication and set page title
   useEffect(() => {
+    document.title = "Add New Post | MindfulBlog";
+    
     if (!isLoading && !user) {
       toast.error("You must be logged in to create a post");
       navigate('/auth');

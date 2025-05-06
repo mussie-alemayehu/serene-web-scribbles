@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,10 @@ export default function AuthPage() {
   const navigate = useNavigate();
   const { signIn, signUp, user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  
+  useEffect(() => {
+    document.title = "Login or Signup | MindfulBlog";
+  }, []);
   
   // Redirect if already logged in
   if (user) {

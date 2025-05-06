@@ -12,6 +12,7 @@ function Home() {
   const { posts, loading } = useBlogPosts();
 
   useEffect(() => {
+    document.title = "MindfulBlog";
     setVisible(true);
   }, []);
 

@@ -35,6 +35,8 @@ function BlogPost() {
         }
         
         setPost(postData);
+        // Set the page title with the post title
+        document.title = `${postData.title} | MindfulBlog`;
         setVisible(true);
       } catch (error) {
         console.error('Error loading post:', error);
